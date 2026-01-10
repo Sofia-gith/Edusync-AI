@@ -37,16 +37,17 @@ A solution for the challenge of `Innovation for Education Equity Hackathon 2026`
 
 ## Technology Stack
 
-### Frontend Repository
+### Backend Repository
 
-The mobile frontend (React Native) is maintained in a separate repository:
+The backend is maintained in a separate repository:
 
-- **Repository:** [EduSync-AI-Frontend](https://github.com/Sofia-gith/)
+- **Repository:** [EduSync-AI-Backend](https://github.com/israelsouza/EduSync-AI)
 
-### Backend & Cloud
+### Mobile (Frontend & Engine)
 
-| Component        | Description                                                                                                                                       |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Language         | Node.js (TypeScript).                                                                                                                             |
-| Central Database | Supabase (PostgreSQL + pgvector) to store all manuals and teacher usage logs.                                                                     |
-| RAG Pipeline     | LangChain.js to process manual PDFs and generate embeddings that will be sent to teachers' phones during synchronization (when there's internet). |
+| Component          | Description                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework          | React Native 0.83+ (leveraging 2026 performance improvements).                                                                                    |
+| Edge LLM Engine    | React Native ExecuTorch (by Meta) or MLC LLM. They allow loading .pte or .gguf models directly into phone memory.                                 |
+| Models (SLMs)      | Llama 3.2 1B (Quantized in 4-bit). Takes about 1.2GB of RAM, running smoothly on mid-range phones.                                                |
+| Local Vector Store | SQLite with VSS extension (Vector Similarity Search). Yes, it's possible to do vector search offline these days!

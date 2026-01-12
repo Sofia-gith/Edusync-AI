@@ -1,50 +1,60 @@
-# Welcome to your Expo app 👋
+# EduSync-AI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A solution for the challenge of `Innovation for Education Equity Hackathon 2026`
 
-## Get started
+> **Challenge Theme:** [Just-in-time Coaching for Teachers — Bridging the Gap Between Training and Classroom Implementation](https://www.hackerearth.com/challenges/hackathon/shikshalokam-2/custom-tab/theme-1/#theme-1)
 
-1. Install dependencies
+## Personas
 
-   ```bash
-   npm install
-   ```
+**`Sunita`** - A passionate multi-grade teacher in a rural school with limited access to continuous professional development. She teaches mixed-age classes (4th-6th grade) with diverse learning needs and limited resources. She's eager to implement innovative teaching methods but struggles with immediate pedagogical challenges in real-time classroom situations.
 
-2. Start the app
+**`CRP` (Coordinador de Recursos Pedagógicos)** - The mentor responsible for providing professional development support to teachers. Appears rarely and often gives generic advice that doesn't fit the specific multi-grade classroom context. Benefits from EduSync-AI as it reduces the gap between teacher needs and support availability.
 
-   ```bash
-   npx expo start
-   ```
+## Problem and Solution
 
-In the output, you'll find options to open the app in a
+| Aspect                                           | Description                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **The Problem**                                  | **Pedagogical Isolation:** `Sunita` has no one to exchange ideas with in the moment of "chaos".<br><br>**Asynchronous and Generic Feedback:** The mentor (`CRP`) appears rarely and gives advice that doesn't apply to the multi-grade classroom reality.<br><br>**Implementation Anxiety:** The fear of making mistakes causes the teacher to abandon innovation and return to mechanical teaching. |
+| **The Solution (EduSync AI: The Pocket Mentor)** | An offline voice assistant that uses Hybrid RAG to provide immediate management and pedagogical strategies, based on official state manuals, but adapted to the local context by AI.                                                                                                                                                                                                                 |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## User Experience Flow
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Stage                                | Description                                                                                                                                                                                               |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Voice Input**                      | `Sunita` presses a physical button (or voice command) and describes the problem: "4th grade class, advanced students agitated, others stuck on subtraction with zero. I need a quick hook!"               |
+| **Local Processing (Edge)**          | The app converts voice to text (local STT) and feeds the SLM.                                                                                                                                             |
+| **Contextual Retrieval (Local RAG)** | The app searches vector indices stored on the phone (pre-downloaded) for the manual excerpt about "Subtraction" and "Multi-grade classroom management".                                                   |
+| **Adaptive Response**                | The app responds via audio: "`Sunita`, use the 'Student Monitor' strategy for the advanced ones. For the zero group, explain that zero is an 'empty chair' that needs help from the neighbor tens place." |
 
-## Get a fresh project
+## Success Metrics
 
-When you're ready, run:
+| Metric                                  | Description                                                                                                    |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Query-to-Resolution Time**            | Reduction in time between teacher's immediate need and receiving actionable guidance.                          |
+| **Frequency of On-Demand Interactions** | Number of teachers using the system for real-time classroom support per week/month.                            |
+| **Strategy Implementation Rate**        | Percentage of teachers successfully implementing personalized strategies in their specific classroom contexts. |
+| **Implementation Anxiety Reduction**    | Self-reported confidence in trying innovative pedagogical methods without abandoning them mid-implementation.  |
 
-```bash
-npm run reset-project
-```
+## Technology Stack
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+| Category                          | Component          | Description                                                                                                                                       |
+| --------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mobile (Frontend & Engine)        | Framework          | React Native 0.83+ (leveraging 2026 performance improvements).                                                                                    |
+| Mobile (Frontend & Engine)        | Edge LLM Engine    | React Native ExecuTorch (by Meta) or MLC LLM. They allow loading .pte or .gguf models directly into phone memory.                                 |
+| Mobile (Frontend & Engine)        | Models (SLMs)      | Llama 3.2 1B (Quantized in 4-bit). Takes about 1.2GB of RAM, running smoothly on mid-range phones.                                                |
+| Mobile (Frontend & Engine)        | Local Vector Store | SQLite with VSS extension (Vector Similarity Search). Yes, it's possible to do vector search offline these days!
 
-To learn more about developing your project with Expo, look at the following resources:
+### Backend Repository
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The Backend (Node) is maintained in a separate repository:
 
-## Join the community
+- **Repository:** [EduSync-AI-Frontend](https://github.com/israelsouza/EduSync-AI)
 
-Join our community of developers creating universal apps.
+### Backend & Cloud
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+| Component        | Description                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Language         | Node.js (TypeScript).                                                                                                                             |
+| Central Database | Supabase (PostgreSQL + pgvector) to store all manuals and teacher usage logs.                                                                     |
+| RAG Pipeline     | LangChain.js to process manual PDFs and generate embeddings that will be sent to teachers' phones during synchronization (when there's internet). |

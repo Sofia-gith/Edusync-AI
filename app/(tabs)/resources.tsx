@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { 
   View, 
   Text, 
-  StyleSheet, 
   ScrollView,
   SafeAreaView,
   TouchableOpacity 
 } from 'react-native';
+import { commonStyles, resourcesStyles } from '../styles';
 
 interface Resource {
   id: string;
@@ -77,13 +77,13 @@ export default function ResourcesScreen() {
     : resources.filter(r => r.category === selectedCategory);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={commonStyles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Resources</Text>
-        <TouchableOpacity style={styles.syncButton}>
-          <Text style={styles.syncIcon}>🔄</Text>
-          <Text style={styles.syncText}>Sync</Text>
+      <View style={commonStyles.header}>
+        <Text style={commonStyles.headerTitle}>Resources</Text>
+        <TouchableOpacity style={resourcesStyles.syncButton}>
+          <Text style={resourcesStyles.syncIcon}>🔄</Text>
+          <Text style={resourcesStyles.syncText}>Sync</Text>
         </TouchableOpacity>
       </View>
 
@@ -91,22 +91,22 @@ export default function ResourcesScreen() {
       <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false}
-        style={styles.categoryContainer}
-        contentContainerStyle={styles.categoryContent}
+        style={resourcesStyles.categoryContainer}
+        contentContainerStyle={resourcesStyles.categoryContent}
       >
         {categories.map((category) => (
           <TouchableOpacity
             key={category.id}
             style={[
-              styles.categoryButton,
-              selectedCategory === category.id && styles.categoryButtonActive
+              resourcesStyles.categoryButton,
+              selectedCategory === category.id && resourcesStyles.categoryButtonActive
             ]}
             onPress={() => setSelectedCategory(category.id)}
           >
-            <Text style={styles.categoryIcon}>{category.icon}</Text>
+            <Text style={resourcesStyles.categoryIcon}>{category.icon}</Text>
             <Text style={[
-              styles.categoryLabel,
-              selectedCategory === category.id && styles.categoryLabelActive
+              resourcesStyles.categoryLabel,
+              selectedCategory === category.id && resourcesStyles.categoryLabelActive
             ]}>
               {category.label}
             </Text>
@@ -116,31 +116,31 @@ export default function ResourcesScreen() {
 
       {/* Resources List */}
       <ScrollView 
-        style={styles.content}
-        contentContainerStyle={styles.contentContainer}
+        style={commonStyles.content}
+        contentContainerStyle={commonStyles.contentContainer}
       >
         {filteredResources.map((resource) => (
           <TouchableOpacity 
             key={resource.id} 
-            style={styles.resourceCard}
+            style={resourcesStyles.resourceCard}
             activeOpacity={0.7}
           >
-            <View style={styles.resourceIcon}>
-              <Text style={styles.resourceIconText}>{resource.icon}</Text>
+            <View style={resourcesStyles.resourceIcon}>
+              <Text style={resourcesStyles.resourceIconText}>{resource.icon}</Text>
             </View>
-            <View style={styles.resourceContent}>
-              <Text style={styles.resourceTitle}>{resource.title}</Text>
-              <Text style={styles.resourceDescription} numberOfLines={2}>
+            <View style={resourcesStyles.resourceContent}>
+              <Text style={resourcesStyles.resourceTitle}>{resource.title}</Text>
+              <Text style={resourcesStyles.resourceDescription} numberOfLines={2}>
                 {resource.description}
               </Text>
-              <View style={styles.resourceFooter}>
-                <View style={styles.categoryTag}>
-                  <Text style={styles.categoryTagText}>
+              <View style={resourcesStyles.resourceFooter}>
+                <View style={resourcesStyles.categoryTag}>
+                  <Text style={resourcesStyles.categoryTagText}>
                     {categories.find(c => c.id === resource.category)?.label}
                   </Text>
                 </View>
-                <TouchableOpacity style={styles.downloadButton}>
-                  <Text style={styles.downloadIcon}>⬇️</Text>
+                <TouchableOpacity style={resourcesStyles.downloadButton}>
+                  <Text style={resourcesStyles.downloadIcon}>⬇️</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -148,11 +148,11 @@ export default function ResourcesScreen() {
         ))}
 
         {/* Info Banner */}
-        <View style={styles.infoBanner}>
-          <Text style={styles.infoBannerIcon}>ℹ️</Text>
-          <View style={styles.infoBannerContent}>
-            <Text style={styles.infoBannerTitle}>Offline Resources</Text>
-            <Text style={styles.infoBannerText}>
+        <View style={resourcesStyles.infoBanner}>
+          <Text style={resourcesStyles.infoBannerIcon}>ℹ️</Text>
+          <View style={resourcesStyles.infoBannerContent}>
+            <Text style={resourcesStyles.infoBannerTitle}>Offline Resources</Text>
+            <Text style={resourcesStyles.infoBannerText}>
               All resources are available offline. Sync when connected to download updates.
             </Text>
           </View>
@@ -161,168 +161,3 @@ export default function ResourcesScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  syncButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#5DCED9',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    gap: 4,
-  },
-  syncIcon: {
-    fontSize: 14,
-  },
-  syncText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#fff',
-  },
-  categoryContainer: {
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  categoryContent: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    gap: 8,
-  },
-  categoryButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-    gap: 6,
-  },
-  categoryButtonActive: {
-    backgroundColor: '#5DCED9',
-  },
-  categoryIcon: {
-    fontSize: 16,
-  },
-  categoryLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#666',
-  },
-  categoryLabelActive: {
-    color: '#fff',
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: 16,
-  },
-  resourceCard: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  resourceIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#F0F9FA',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  resourceIconText: {
-    fontSize: 24,
-  },
-  resourceContent: {
-    flex: 1,
-  },
-  resourceTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 4,
-  },
-  resourceDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  resourceFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  categoryTag: {
-    backgroundColor: '#f0f0f0',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  categoryTagText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#666',
-  },
-  downloadButton: {
-    padding: 4,
-  },
-  downloadIcon: {
-    fontSize: 18,
-  },
-  infoBanner: {
-    flexDirection: 'row',
-    backgroundColor: '#E3F2FD',
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: '#2196F3',
-  },
-  infoBannerIcon: {
-    fontSize: 24,
-    marginRight: 12,
-  },
-  infoBannerContent: {
-    flex: 1,
-  },
-  infoBannerTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1976D2',
-    marginBottom: 4,
-  },
-  infoBannerText: {
-    fontSize: 13,
-    color: '#1565C0',
-    lineHeight: 18,
-  },
-});

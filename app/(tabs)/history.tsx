@@ -2,11 +2,11 @@ import React from 'react';
 import { 
   View, 
   Text, 
-  StyleSheet, 
   ScrollView,
   SafeAreaView,
   TouchableOpacity 
 } from 'react-native';
+import { commonStyles, historyStyles } from '../styles';
 
 interface ConversationItem {
   id: string;
@@ -56,41 +56,41 @@ export default function HistoryScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={commonStyles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Conversation History</Text>
-        <TouchableOpacity style={styles.searchButton}>
-          <Text style={styles.searchIcon}>🔍</Text>
+      <View style={commonStyles.header}>
+        <Text style={commonStyles.headerTitle}>Conversation History</Text>
+        <TouchableOpacity style={historyStyles.searchButton}>
+          <Text style={historyStyles.searchIcon}>🔍</Text>
         </TouchableOpacity>
       </View>
 
       {/* Content */}
       <ScrollView 
-        style={styles.content}
-        contentContainerStyle={styles.contentContainer}
+        style={commonStyles.content}
+        contentContainerStyle={commonStyles.contentContainer}
       >
         {conversations.map((conversation) => (
           <TouchableOpacity 
             key={conversation.id} 
-            style={styles.conversationCard}
+            style={historyStyles.conversationCard}
             activeOpacity={0.7}
           >
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardTitle}>{conversation.title}</Text>
-              <Text style={styles.cardDate}>{conversation.date}</Text>
+            <View style={historyStyles.cardHeader}>
+              <Text style={historyStyles.cardTitle}>{conversation.title}</Text>
+              <Text style={historyStyles.cardDate}>{conversation.date}</Text>
             </View>
-            <Text style={styles.cardPreview} numberOfLines={2}>
+            <Text style={historyStyles.cardPreview} numberOfLines={2}>
               {conversation.preview}
             </Text>
-            <View style={styles.cardFooter}>
-              <Text style={styles.cardTime}>{conversation.time}</Text>
-              <View style={styles.cardActions}>
-                <TouchableOpacity style={styles.actionButton}>
-                  <Text style={styles.actionIcon}>🔊</Text>
+            <View style={historyStyles.cardFooter}>
+              <Text style={historyStyles.cardTime}>{conversation.time}</Text>
+              <View style={historyStyles.cardActions}>
+                <TouchableOpacity style={historyStyles.actionButton}>
+                  <Text style={historyStyles.actionIcon}>🔊</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.actionButton}>
-                  <Text style={styles.actionIcon}>⋯</Text>
+                <TouchableOpacity style={historyStyles.actionButton}>
+                  <Text style={historyStyles.actionIcon}>⋯</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -99,10 +99,10 @@ export default function HistoryScreen() {
 
         {/* Empty State (hidden when there are conversations) */}
         {conversations.length === 0 && (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>💬</Text>
-            <Text style={styles.emptyTitle}>No conversations yet</Text>
-            <Text style={styles.emptyText}>
+          <View style={commonStyles.emptyState}>
+            <Text style={commonStyles.emptyStateIcon}>💬</Text>
+            <Text style={commonStyles.emptyStateTitle}>No conversations yet</Text>
+            <Text style={commonStyles.emptyStateText}>
               Start a conversation on the Home tab to see your history here
             </Text>
           </View>
@@ -111,111 +111,3 @@ export default function HistoryScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  searchButton: {
-    padding: 8,
-  },
-  searchIcon: {
-    fontSize: 20,
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    padding: 16,
-  },
-  conversationCard: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 8,
-  },
-  cardTitle: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginRight: 8,
-  },
-  cardDate: {
-    fontSize: 12,
-    color: '#999',
-  },
-  cardPreview: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  cardFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  cardTime: {
-    fontSize: 12,
-    color: '#999',
-  },
-  cardActions: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  actionButton: {
-    padding: 4,
-  },
-  actionIcon: {
-    fontSize: 18,
-  },
-  emptyState: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 60,
-    paddingHorizontal: 40,
-  },
-  emptyIcon: {
-    fontSize: 64,
-    marginBottom: 16,
-  },
-  emptyTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  emptyText: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-    lineHeight: 20,
-  },
-});

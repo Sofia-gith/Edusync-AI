@@ -1,31 +1,40 @@
+// styles/profile.styles.ts
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, BorderRadius, FontSizes, FontWeights, Shadows } from './theme';
 
 export const profileStyles = StyleSheet.create({
+  // Profile Section
   profileSection: {
     alignItems: 'center',
-    padding: Spacing.xxxl,
+    padding: Spacing.huge,
     backgroundColor: Colors.white,
     borderBottomWidth: 1,
     borderBottomColor: Colors.border,
   },
+  avatarContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#FFE8D6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: Spacing.lg,
+  },
+  avatarIcon: {
+    fontSize: 48,
+  },
   userName: {
-    fontSize: FontSizes.xxl,
+    fontSize: FontSizes.xxxl,
     fontWeight: FontWeights.bold,
     color: Colors.textPrimary,
     marginBottom: Spacing.xs,
   },
   userRole: {
-    fontSize: FontSizes.lg,
-    color: Colors.textSecondary,
-    marginBottom: 2,
-  },
-  userSchool: {
     fontSize: FontSizes.base,
-    color: Colors.textTertiary,
+    color: Colors.textSecondary,
   },
 
-  // Stats
+  // Stats Container
   statsContainer: {
     flexDirection: 'row',
     padding: Spacing.lg,
@@ -37,28 +46,66 @@ export const profileStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: Spacing.lg,
-    backgroundColor: Colors.primaryLight,
+    backgroundColor: Colors.white,
     borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+    borderColor: Colors.border,
   },
-  statNumber: {
-    fontSize: FontSizes.xxl,
-    fontWeight: FontWeights.bold,
-    color: Colors.primary,
-    marginBottom: Spacing.xs,
+  statIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: BorderRadius.xxl,
+    backgroundColor: '#F0F9FA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  statIcon: {
+    fontSize: 24,
   },
   statLabel: {
-    fontSize: FontSizes.sm,
-    color: Colors.textSecondary,
-    textAlign: 'center',
+    fontSize: FontSizes.xs,
+    fontWeight: FontWeights.semibold,
+    color: Colors.textTertiary,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: Spacing.xs,
+  },
+  statNumber: {
+    fontSize: FontSizes.xxxl,
+    fontWeight: FontWeights.bold,
+    color: Colors.textPrimary,
   },
 
-  // Settings
+  // Context Items
+  contextItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.md,
+    backgroundColor: Colors.white,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.borderLight,
+  },
+  contextLabel: {
+    fontSize: FontSizes.base,
+    color: Colors.textSecondary,
+  },
+  contextValue: {
+    fontSize: FontSizes.base,
+    fontWeight: FontWeights.semibold,
+    color: Colors.textPrimary,
+    textAlign: 'right',
+  },
+
+  // Settings Items
   settingItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
+    backgroundColor: Colors.white,
     borderBottomWidth: 1,
     borderBottomColor: Colors.borderLight,
   },
@@ -107,7 +154,7 @@ export const profileStyles = StyleSheet.create({
   // Logout Button
   logoutButton: {
     marginHorizontal: Spacing.lg,
-    marginTop: Spacing.sm,
+    marginTop: Spacing.lg,
     padding: Spacing.lg,
     backgroundColor: Colors.white,
     borderRadius: BorderRadius.lg,

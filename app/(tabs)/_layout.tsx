@@ -3,7 +3,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
+import { HomeIcon, HistoryIcon, ResourcesIcon, ProfileIcon } from '../components/NavIcons';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -17,6 +17,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: '#999',
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: '#fff',
           borderTopWidth: 1,
@@ -35,11 +36,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={24} 
-              name="house.fill" 
-              color={color}
-            />
+            <HomeIcon color={color} focused={focused} />
           ),
         }}
       />
@@ -48,11 +45,7 @@ export default function TabLayout() {
         options={{
           title: 'History',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={24} 
-              name="clock.fill" 
-              color={color}
-            />
+            <HistoryIcon color={color} focused={focused} />
           ),
         }}
       />
@@ -61,11 +54,7 @@ export default function TabLayout() {
         options={{
           title: 'Resources',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={24} 
-              name="book.fill" 
-              color={color}
-            />
+            <ResourcesIcon color={color} focused={focused} />
           ),
         }}
       />
@@ -74,11 +63,7 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol 
-              size={24} 
-              name="person.fill" 
-              color={color}
-            />
+            <ProfileIcon color={color} focused={focused} />
           ),
         }}
       />

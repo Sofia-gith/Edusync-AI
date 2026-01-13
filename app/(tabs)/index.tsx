@@ -1,16 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   View, 
   Text, 
   TouchableOpacity, 
   ScrollView,
-  SafeAreaView 
+  SafeAreaView,
+  Animated
 } from 'react-native';
 import { commonStyles, homeStyles } from '../styles';
 
 export default function HomeScreen() {
   const [isListening, setIsListening] = useState(false);
   const [showTip, setShowTip] = useState(true);
+  
+  // Animation values
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  const fadeAnim = useRef(new Animated.Value(0.3)).current;
+
+  useEffect(() => {
+    if (isListening) {
+      // Pulsing animation when listening
+      Animated.loop(
+        Animated.sequence([
+          Animated.parallel([
+            Animated.timing(pulseAnim, {
+              toValue: 1.15,
+              duration: 1000,
+              useNativeDriver: true,
+            }),
+            Animated.timing(fadeAnim, {
+              toValue: 0,
+              duration: 1000,
+              useNativeDriver: true,
+            }),
+          ]),
+          Animated.parallel([
+            Animated.timing(pulseAnim, {
+              toValue: 1,
+              duration: 1000,
+              useNativeDriver: true,
+            }),
+            Animated.timing(fadeAnim, {
+              toValue: 0.3,
+              duration: 1000,
+              useNativeDriver: true,
+            }),
+          ]),
+        ])
+      ).start();
+    } else {
+      // Reset animation
+      pulseAnim.setValue(1);
+      fadeAnim.setValue(0.3);
+    }
+  }, [isListening, pulseAnim, fadeAnim]);
 
   const handleVoicePress = () => {
     setIsListening(!isListening);
@@ -51,23 +94,43 @@ export default function HomeScreen() {
       >
         {/* Greeting */}
         <View style={homeStyles.greetingContainer}>
-          <Text style={homeStyles.greeting}>Hello, Sunita! 👋</Text>
+          <Text style={homeStyles.greeting}>Hello, Sunita!</Text>
           <Text style={homeStyles.question}>How can I help your class today?</Text>
         </View>
 
-        {/* Voice Button */}
+        {/* Voice Button with Pulsing Animation */}
         <View style={homeStyles.voiceContainer}>
+          {/* Outer pulsing circle */}
+          <Animated.View 
+            style={[
+              homeStyles.pulseCircle,
+              {
+                transform: [{ scale: pulseAnim }],
+                opacity: isListening ? fadeAnim : 0,
+                backgroundColor: isListening ? '#DC2626' : undefined,
+              }
+            ]} 
+          />
+          
+          {/* Main voice button */}
           <TouchableOpacity 
             style={[
-              homeStyles.voiceButton, 
-              isListening && homeStyles.voiceButtonActive
+              homeStyles.voiceButtonMinimal, 
+              isListening && homeStyles.voiceButtonListening
             ]} 
             onPress={handleVoicePress}
             activeOpacity={0.8}
           >
-            <Text style={homeStyles.micIcon}>🎤</Text>
+            <View style={homeStyles.micIconContainer}>
+              <View style={homeStyles.micBody} />
+              <View style={homeStyles.micBase} />
+              <View style={homeStyles.micStand} />
+            </View>
           </TouchableOpacity>
-          <Text style={homeStyles.voiceLabel}>Tap to speak</Text>
+          
+          <Text style={homeStyles.voiceLabel}>
+            {isListening ? 'Listening...' : 'Tap to speak'}
+          </Text>
         </View>
 
         {/* Pedagogical Tip */}
@@ -75,11 +138,17 @@ export default function HomeScreen() {
           <View style={homeStyles.tipContainer}>
             <View style={homeStyles.tipHeader}>
               <View style={homeStyles.tipIconContainer}>
-                <Text style={homeStyles.tipIcon}>💡</Text>
+                <View style={homeStyles.lightbulbIcon}>
+                  <View style={homeStyles.lightbulbTop} />
+                  <View style={homeStyles.lightbulbBase} />
+                </View>
               </View>
               <Text style={homeStyles.tipTitle}>QUICK TIP</Text>
               <TouchableOpacity onPress={() => setShowTip(false)}>
-                <Text style={homeStyles.closeButton}>✕</Text>
+                <View style={homeStyles.closeIcon}>
+                  <View style={homeStyles.closeLine1} />
+                  <View style={homeStyles.closeLine2} />
+                </View>
               </TouchableOpacity>
             </View>
             <Text style={homeStyles.tipText}>
@@ -93,7 +162,10 @@ export default function HomeScreen() {
         {/* Last Conversation */}
         <View style={homeStyles.lastConversation}>
           <View style={homeStyles.conversationHeader}>
-            <Text style={homeStyles.conversationIcon}>💬</Text>
+            <View style={homeStyles.chatIcon}>
+              <View style={homeStyles.chatBubble} />
+              <View style={homeStyles.chatTail} />
+            </View>
             <Text style={homeStyles.conversationTitle}>Last conversation</Text>
           </View>
 
@@ -108,7 +180,10 @@ export default function HomeScreen() {
           {/* Assistant Response */}
           <View style={homeStyles.messageAssistant}>
             <View style={homeStyles.assistantAvatar}>
-              <Text style={homeStyles.assistantAvatarText}>🤖</Text>
+              <View style={homeStyles.robotIcon}>
+                <View style={homeStyles.robotHead} />
+                <View style={homeStyles.robotAntenna} />
+              </View>
             </View>
             <View style={homeStyles.messageAssistantContent}>
               <Text style={homeStyles.messageAssistantText}>
@@ -121,7 +196,11 @@ export default function HomeScreen() {
               <View style={homeStyles.messageFooter}>
                 <Text style={homeStyles.messageTime}>13:53</Text>
                 <TouchableOpacity>
-                  <Text style={homeStyles.audioIcon}>🔊</Text>
+                  <View style={homeStyles.speakerIcon}>
+                    <View style={homeStyles.speakerBody} />
+                    <View style={homeStyles.speakerWave1} />
+                    <View style={homeStyles.speakerWave2} />
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>

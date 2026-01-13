@@ -55,7 +55,46 @@ export const historyStyles = StyleSheet.create({
   actionButton: {
     padding: Spacing.xs,
   },
-  actionIcon: {
-    fontSize: FontSizes.xl,
+  
+  // Ícone de alto-falante pequeno
+  speakerIconSmall: {
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  speakerBodySmall: {
+    width: 6,
+    height: 8,
+    backgroundColor: Colors.primary,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
+  },
+  speakerWaveSmall: {
+    width: 5,
+    height: 6,
+    borderWidth: 2,
+    borderColor: Colors.primary,
+    borderLeftWidth: 0,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    marginLeft: 1,
+  },
+  
+  // Ícone de mais opções (três pontos)
+  moreIcon: {
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 3,
+  },
+  moreDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: Colors.textTertiary,
   },
 });

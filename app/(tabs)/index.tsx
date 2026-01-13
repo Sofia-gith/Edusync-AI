@@ -7,7 +7,9 @@ import {
   SafeAreaView,
   Animated
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { commonStyles, homeStyles } from '../styles';
+import { Colors } from '../styles/theme';
 
 export default function HomeScreen() {
   const [isListening, setIsListening] = useState(false);
@@ -79,10 +81,10 @@ export default function HomeScreen() {
             <Text style={commonStyles.badgeText}>Offline</Text>
           </View>
           <TouchableOpacity style={commonStyles.iconButton}>
-            <Text>⚙️</Text>
+            <Ionicons name="settings-outline" size={20} color={Colors.textSecondary} />
           </TouchableOpacity>
           <TouchableOpacity style={commonStyles.iconButton}>
-            <Text>👤</Text>
+            <Ionicons name="person-outline" size={20} color={Colors.textSecondary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -121,11 +123,11 @@ export default function HomeScreen() {
             onPress={handleVoicePress}
             activeOpacity={0.8}
           >
-            <View style={homeStyles.micIconContainer}>
-              <View style={homeStyles.micBody} />
-              <View style={homeStyles.micBase} />
-              <View style={homeStyles.micStand} />
-            </View>
+            <Ionicons 
+              name={isListening ? "mic" : "mic-outline"} 
+              size={64} 
+              color={Colors.white} 
+            />
           </TouchableOpacity>
           
           <Text style={homeStyles.voiceLabel}>
@@ -138,17 +140,11 @@ export default function HomeScreen() {
           <View style={homeStyles.tipContainer}>
             <View style={homeStyles.tipHeader}>
               <View style={homeStyles.tipIconContainer}>
-                <View style={homeStyles.lightbulbIcon}>
-                  <View style={homeStyles.lightbulbTop} />
-                  <View style={homeStyles.lightbulbBase} />
-                </View>
+                <Ionicons name="bulb-outline" size={24} color={Colors.accent} />
               </View>
               <Text style={homeStyles.tipTitle}>QUICK TIP</Text>
               <TouchableOpacity onPress={() => setShowTip(false)}>
-                <View style={homeStyles.closeIcon}>
-                  <View style={homeStyles.closeLine1} />
-                  <View style={homeStyles.closeLine2} />
-                </View>
+                <Ionicons name="close" size={20} color={Colors.textTertiary} />
               </TouchableOpacity>
             </View>
             <Text style={homeStyles.tipText}>
@@ -162,10 +158,7 @@ export default function HomeScreen() {
         {/* Last Conversation */}
         <View style={homeStyles.lastConversation}>
           <View style={homeStyles.conversationHeader}>
-            <View style={homeStyles.chatIcon}>
-              <View style={homeStyles.chatBubble} />
-              <View style={homeStyles.chatTail} />
-            </View>
+            <Ionicons name="chatbubble" size={24} color={Colors.primary} />
             <Text style={homeStyles.conversationTitle}>Last conversation</Text>
           </View>
 
@@ -180,10 +173,7 @@ export default function HomeScreen() {
           {/* Assistant Response */}
           <View style={homeStyles.messageAssistant}>
             <View style={homeStyles.assistantAvatar}>
-              <View style={homeStyles.robotIcon}>
-                <View style={homeStyles.robotHead} />
-                <View style={homeStyles.robotAntenna} />
-              </View>
+              <Ionicons name="logo-android" size={20} color={Colors.white} />
             </View>
             <View style={homeStyles.messageAssistantContent}>
               <Text style={homeStyles.messageAssistantText}>
@@ -196,11 +186,7 @@ export default function HomeScreen() {
               <View style={homeStyles.messageFooter}>
                 <Text style={homeStyles.messageTime}>13:53</Text>
                 <TouchableOpacity>
-                  <View style={homeStyles.speakerIcon}>
-                    <View style={homeStyles.speakerBody} />
-                    <View style={homeStyles.speakerWave1} />
-                    <View style={homeStyles.speakerWave2} />
-                  </View>
+                  <Ionicons name="volume-high" size={24} color={Colors.primary} />
                 </TouchableOpacity>
               </View>
             </View>

@@ -6,25 +6,27 @@ import {
   SafeAreaView,
   TouchableOpacity 
 } from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { commonStyles, resourcesStyles } from '../styles';
+import { Colors } from '../styles/theme';
 
 interface Resource {
   id: string;
   title: string;
   description: string;
   category: string;
-  icon: string;
+  icon: keyof typeof Ionicons.glyphMap;
 }
 
 export default function ResourcesScreen() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: 'All', icon: '📚' },
-    { id: 'math', label: 'Math', icon: '➕' },
-    { id: 'reading', label: 'Reading', icon: '📖' },
-    { id: 'classroom', label: 'Classroom', icon: '🏫' },
-    { id: 'behavior', label: 'Behavior', icon: '✨' },
+    { id: 'all', label: 'All', icon: 'library' as const },
+    { id: 'math', label: 'Math', icon: 'calculator' as const },
+    { id: 'reading', label: 'Reading', icon: 'book' as const },
+    { id: 'classroom', label: 'Classroom', icon: 'school' as const },
+    { id: 'behavior', label: 'Behavior', icon: 'star' as const },
   ];
 
   const resources: Resource[] = [
@@ -33,42 +35,42 @@ export default function ResourcesScreen() {
       title: 'Multi-grade Teaching Strategies',
       description: 'Comprehensive guide for managing classrooms with students at different grade levels',
       category: 'classroom',
-      icon: '👥'
+      icon: 'people'
     },
     {
       id: '2',
       title: 'Low-Resource Math Activities',
       description: 'Creative math exercises that require minimal materials but deliver maximum impact',
       category: 'math',
-      icon: '🔢'
+      icon: 'calculator'
     },
     {
       id: '3',
       title: 'Reading Comprehension Techniques',
       description: 'Evidence-based strategies to improve reading skills across different proficiency levels',
       category: 'reading',
-      icon: '📚'
+      icon: 'book'
     },
     {
       id: '4',
       title: 'Peer Tutoring Framework',
       description: 'How to implement effective peer-to-peer learning in your classroom',
       category: 'classroom',
-      icon: '🤝'
+      icon: 'people-circle'
     },
     {
       id: '5',
       title: 'Positive Behavior Management',
       description: 'Practical approaches to encourage good behavior and handle disruptions constructively',
       category: 'behavior',
-      icon: '⭐'
+      icon: 'star'
     },
     {
       id: '6',
       title: 'Subtraction with Regrouping',
       description: 'Step-by-step lesson plans and visual aids for teaching subtraction with zeros',
       category: 'math',
-      icon: '➖'
+      icon: 'remove-circle'
     },
   ];
 
@@ -82,7 +84,7 @@ export default function ResourcesScreen() {
       <View style={commonStyles.header}>
         <Text style={commonStyles.headerTitle}>Resources</Text>
         <TouchableOpacity style={resourcesStyles.syncButton}>
-          <Text style={resourcesStyles.syncIcon}>🔄</Text>
+          <Ionicons name="sync" size={16} color={Colors.white} />
           <Text style={resourcesStyles.syncText}>Sync</Text>
         </TouchableOpacity>
       </View>
@@ -103,7 +105,11 @@ export default function ResourcesScreen() {
             ]}
             onPress={() => setSelectedCategory(category.id)}
           >
-            <Text style={resourcesStyles.categoryIcon}>{category.icon}</Text>
+            <Ionicons 
+              name={category.icon} 
+              size={18} 
+              color={selectedCategory === category.id ? Colors.white : Colors.textSecondary} 
+            />
             <Text style={[
               resourcesStyles.categoryLabel,
               selectedCategory === category.id && resourcesStyles.categoryLabelActive
@@ -126,7 +132,7 @@ export default function ResourcesScreen() {
             activeOpacity={0.7}
           >
             <View style={resourcesStyles.resourceIcon}>
-              <Text style={resourcesStyles.resourceIconText}>{resource.icon}</Text>
+              <Ionicons name={resource.icon} size={24} color={Colors.primary} />
             </View>
             <View style={resourcesStyles.resourceContent}>
               <Text style={resourcesStyles.resourceTitle}>{resource.title}</Text>
@@ -140,7 +146,7 @@ export default function ResourcesScreen() {
                   </Text>
                 </View>
                 <TouchableOpacity style={resourcesStyles.downloadButton}>
-                  <Text style={resourcesStyles.downloadIcon}>⬇️</Text>
+                  <Ionicons name="download-outline" size={20} color={Colors.primary} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -149,7 +155,7 @@ export default function ResourcesScreen() {
 
         {/* Info Banner */}
         <View style={resourcesStyles.infoBanner}>
-          <Text style={resourcesStyles.infoBannerIcon}>ℹ️</Text>
+          <Ionicons name="information-circle" size={24} color={Colors.info} />
           <View style={resourcesStyles.infoBannerContent}>
             <Text style={resourcesStyles.infoBannerTitle}>Offline Resources</Text>
             <Text style={resourcesStyles.infoBannerText}>

@@ -6,7 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity 
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { commonStyles, historyStyles } from '../styles';
+import { Colors } from '../styles/theme';
 
 interface ConversationItem {
   id: string;
@@ -61,7 +63,7 @@ export default function HistoryScreen() {
       <View style={commonStyles.header}>
         <Text style={commonStyles.headerTitle}>Conversation History</Text>
         <TouchableOpacity style={historyStyles.searchButton}>
-          <Text style={historyStyles.searchIcon}>🔍</Text>
+          <Ionicons name="search" size={20} color={Colors.textSecondary} />
         </TouchableOpacity>
       </View>
 
@@ -87,10 +89,10 @@ export default function HistoryScreen() {
               <Text style={historyStyles.cardTime}>{conversation.time}</Text>
               <View style={historyStyles.cardActions}>
                 <TouchableOpacity style={historyStyles.actionButton}>
-                  <Text style={historyStyles.actionIcon}>🔊</Text>
+                  <Ionicons name="volume-high" size={20} color={Colors.primary} />
                 </TouchableOpacity>
                 <TouchableOpacity style={historyStyles.actionButton}>
-                  <Text style={historyStyles.actionIcon}>⋯</Text>
+                  <Ionicons name="ellipsis-vertical" size={20} color={Colors.textTertiary} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -100,7 +102,7 @@ export default function HistoryScreen() {
         {/* Empty State (hidden when there are conversations) */}
         {conversations.length === 0 && (
           <View style={commonStyles.emptyState}>
-            <Text style={commonStyles.emptyStateIcon}>💬</Text>
+            <Ionicons name="chatbubbles-outline" size={64} color={Colors.textTertiary} />
             <Text style={commonStyles.emptyStateTitle}>No conversations yet</Text>
             <Text style={commonStyles.emptyStateText}>
               Start a conversation on the Home tab to see your history here

@@ -6,7 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity 
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { commonStyles, profileStyles } from '../styles';
+import { Colors } from '../styles/theme';
 
 export default function ProfileScreen() {
   return (
@@ -20,7 +22,7 @@ export default function ProfileScreen() {
             <Text style={commonStyles.badgeText}>Offline</Text>
           </View>
           <TouchableOpacity style={commonStyles.iconButton}>
-            <Text>⚙️</Text>
+            <Ionicons name="settings-outline" size={20} color={Colors.textSecondary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -32,7 +34,7 @@ export default function ProfileScreen() {
         {/* User Profile Section */}
         <View style={profileStyles.profileSection}>
           <View style={profileStyles.avatarContainer}>
-            <Text style={profileStyles.avatarIcon}>🎓</Text>
+            <Ionicons name="school" size={48} color="#FF9800" />
           </View>
           <Text style={profileStyles.userName}>Sunita Sharma</Text>
           <Text style={profileStyles.userRole}>Teacher · Rural School Jaipur</Text>
@@ -42,7 +44,7 @@ export default function ProfileScreen() {
         <View style={profileStyles.statsContainer}>
           <View style={profileStyles.statCard}>
             <View style={profileStyles.statIconContainer}>
-              <Text style={profileStyles.statIcon}>📚</Text>
+              <Ionicons name="book" size={24} color={Colors.primary} />
             </View>
             <Text style={profileStyles.statLabel}>CLASSES</Text>
             <Text style={profileStyles.statNumber}>3</Text>
@@ -50,7 +52,7 @@ export default function ProfileScreen() {
           
           <View style={profileStyles.statCard}>
             <View style={profileStyles.statIconContainer}>
-              <Text style={profileStyles.statIcon}>👨‍🎓</Text>
+              <Ionicons name="people" size={24} color={Colors.primary} />
             </View>
             <Text style={profileStyles.statLabel}>STUDENTS</Text>
             <Text style={profileStyles.statNumber}>45</Text>
@@ -58,7 +60,7 @@ export default function ProfileScreen() {
           
           <View style={profileStyles.statCard}>
             <View style={profileStyles.statIconContainer}>
-              <Text style={profileStyles.statIcon}>💬</Text>
+              <Ionicons name="chatbubbles" size={24} color={Colors.primary} />
             </View>
             <Text style={profileStyles.statLabel}>CONSULTATIONS</Text>
             <Text style={profileStyles.statNumber}>47</Text>
@@ -91,30 +93,30 @@ export default function ProfileScreen() {
           
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>🌐</Text>
-              <View>
+              <Ionicons name="globe-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Language</Text>
                 <Text style={profileStyles.settingSubtitle}>English</Text>
               </View>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>🎤</Text>
-              <View>
+              <Ionicons name="mic-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Voice Settings</Text>
                 <Text style={profileStyles.settingSubtitle}>Adjust voice input</Text>
               </View>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>💡</Text>
-              <View>
+              <Ionicons name="bulb-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Daily Tips</Text>
                 <Text style={profileStyles.settingSubtitle}>Show pedagogical tips</Text>
               </View>
@@ -131,35 +133,35 @@ export default function ProfileScreen() {
           
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>☁️</Text>
-              <View>
+              <Ionicons name="cloud-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Sync Data</Text>
                 <Text style={profileStyles.settingSubtitle}>Last sync: 2 hours ago</Text>
               </View>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>💾</Text>
-              <View>
+              <Ionicons name="save-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Storage Usage</Text>
                 <Text style={profileStyles.settingSubtitle}>1.2 GB / 5 GB used</Text>
               </View>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>🗑️</Text>
-              <View>
+              <Ionicons name="trash-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>Clear Cache</Text>
                 <Text style={profileStyles.settingSubtitle}>Free up space</Text>
               </View>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
         </View>
 
@@ -169,24 +171,24 @@ export default function ProfileScreen() {
           
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>📖</Text>
-              <Text style={profileStyles.settingTitle}>Help & Tutorial</Text>
+              <Ionicons name="help-circle-outline" size={24} color={Colors.primary} />
+              <Text style={[profileStyles.settingTitle, { marginLeft: 12 }]}>Help & Tutorial</Text>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>💬</Text>
-              <Text style={profileStyles.settingTitle}>Send Feedback</Text>
+              <Ionicons name="chatbubble-ellipses-outline" size={24} color={Colors.primary} />
+              <Text style={[profileStyles.settingTitle, { marginLeft: 12 }]}>Send Feedback</Text>
             </View>
-            <Text style={profileStyles.settingArrow}>›</Text>
+            <Ionicons name="chevron-forward" size={20} color={Colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity style={profileStyles.settingItem}>
             <View style={profileStyles.settingLeft}>
-              <Text style={profileStyles.settingIcon}>ℹ️</Text>
-              <View>
+              <Ionicons name="information-circle-outline" size={24} color={Colors.primary} />
+              <View style={{ marginLeft: 12 }}>
                 <Text style={profileStyles.settingTitle}>App Version</Text>
                 <Text style={profileStyles.settingSubtitle}>1.0.0</Text>
               </View>
@@ -196,6 +198,7 @@ export default function ProfileScreen() {
 
         {/* Logout Button */}
         <TouchableOpacity style={profileStyles.logoutButton}>
+          <Ionicons name="log-out-outline" size={20} color={Colors.error} style={{ marginRight: 8 }} />
           <Text style={profileStyles.logoutText}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>

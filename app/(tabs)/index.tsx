@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
+
 // Components
 import { MessageBubble } from "@/components/features/Conversation/MessageBubble";
 import { PedagogicalTip } from "@/components/features/Tips/PedagogicalTip";
@@ -11,6 +12,8 @@ import { AppHeader } from "@/components/Shared/Header";
 // Hooks
 import { useConversations } from "@/hooks/useConversations";
 
+// Side effects
+import { useEffect } from "react";
 // Styles
 import { commonStyles, homeStyles } from "../styles";
 import { Colors } from "../styles/theme";
@@ -18,8 +21,33 @@ import { Colors } from "../styles/theme";
 export default function HomeScreen() {
   const [isListening, setIsListening] = useState(false);
   const [showTip, setShowTip] = useState(true);
+  
+  const { currentConversation, addMessage, createConversation } = useConversations();
 
-  const { currentConversation, addMessage } = useConversations();
+  // Criar conversa de exemplo na primeira renderização
+  useEffect(() => {
+    if (!currentConversation) {
+      const conv = createConversation('Multi-grade classroom organization');
+      
+      // Adicionar mensagem do usuário
+      setTimeout(() => {
+        addMessage(
+          conv.id,
+          'user',
+          'How to organize activities for multi-grade classroom with limited resources?'
+        );
+        
+        // Adicionar resposta do assistente
+        setTimeout(() => {
+          addMessage(
+            conv.id,
+            'assistant',
+            'Sunita, for multi-grade classrooms with limited resources, I recommend the \'Rotating Stations\' strategy: divide your classroom into 3 corners - silent reading, guided activity with you, and collaborative work between grades. Rotate every 15 minutes. Older students can be \'tutors\' for younger ones.'
+          );
+        }, 500);
+      }, 100);
+    }
+  }, []);
 
   const handleVoicePress = () => {
     setIsListening(!isListening);
@@ -27,23 +55,23 @@ export default function HomeScreen() {
   };
 
   const handlePlayAudio = (messageId: string) => {
-    console.log("Playing audio for message:", messageId);
+    console.log('Playing audio for message:', messageId);
     // Audio playback logic will be implemented later
   };
 
   // Get last messages for preview
   const lastUserMessage = currentConversation?.messages
-    .filter((m) => m.role === "user")
+    .filter(m => m.role === 'user')
     .slice(-1)[0];
-
+    
   const lastAssistantMessage = currentConversation?.messages
-    .filter((m) => m.role === "assistant")
+    .filter(m => m.role === 'assistant')
     .slice(-1)[0];
 
   return (
     <SafeAreaView style={commonStyles.container}>
       {/* Header */}
-      <AppHeader
+      <AppHeader 
         userName="Sunita"
         appName="EduSync"
         subtitle="Your pocket mentor"
@@ -52,24 +80,25 @@ export default function HomeScreen() {
       />
 
       {/* Main Content */}
-      <ScrollView
-        style={commonStyles.content}
+      <ScrollView 
+        style={commonStyles.content} 
         contentContainerStyle={commonStyles.contentContainer}
       >
         {/* Greeting */}
         <View style={homeStyles.greetingContainer}>
           <Text style={homeStyles.greeting}>Hello, Sunita!</Text>
-          <Text style={homeStyles.question}>
-            How can I help your class today?
-          </Text>
+          <Text style={homeStyles.question}>How can I help your class today?</Text>
         </View>
 
         {/* Voice Button */}
-        <VoiceButton isListening={isListening} onPress={handleVoicePress} />
+        <VoiceButton 
+          isListening={isListening}
+          onPress={handleVoicePress}
+        />
 
         {/* Pedagogical Tip */}
         {showTip && (
-          <PedagogicalTip
+          <PedagogicalTip 
             onClose={() => setShowTip(false)}
             tip="In multi-grade classrooms, older students can serve as 'peer monitors' for younger ones. This develops leadership skills and frees you up to support students who need the most help."
           />
@@ -80,9 +109,7 @@ export default function HomeScreen() {
           <View style={homeStyles.lastConversation}>
             <View style={homeStyles.conversationHeader}>
               <Ionicons name="chatbubble" size={24} color={Colors.primary} />
-              <Text style={homeStyles.conversationTitle}>
-                Last conversation
-              </Text>
+              <Text style={homeStyles.conversationTitle}>Last conversation</Text>
             </View>
 
             {lastUserMessage && (

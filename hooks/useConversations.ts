@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+// hooks/useConversations.ts
+import { useState, useCallback, useEffect } from 'react';
 
 export type MessageRole = 'user' | 'assistant';
 
@@ -55,7 +56,7 @@ export const useConversations = () => {
   ) => {
     const now = new Date();
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random()}`,
       role,
       content,
       timestamp: now.toLocaleTimeString('en-US', { 
@@ -65,6 +66,7 @@ export const useConversations = () => {
       }),
     };
 
+    // Atualizar no array de conversas
     setConversations(prev => 
       prev.map(conv => {
         if (conv.id === conversationId) {
@@ -80,18 +82,31 @@ export const useConversations = () => {
       })
     );
 
-    if (currentConversation?.id === conversationId) {
-      setCurrentConversation(prev => 
-        prev ? { 
-          ...prev, 
+    // Atualizar a conversa atual
+    setCurrentConversation(prev => {
+      if (prev && prev.id === conversationId) {
+        return {
+          ...prev,
           messages: [...prev.messages, newMessage],
-          updatedAt: now
-        } : null
-      );
-    }
+          preview: role === 'user' ? content : prev.preview,
+          updatedAt: now,
+        };
+      }
+      return prev;
+    });
 
     return newMessage;
-  }, [currentConversation]);
+  }, []);
+
+  // Sincronizar currentConversation com conversations
+  useEffect(() => {
+    if (currentConversation && conversations.length > 0) {
+      const updated = conversations.find(c => c.id === currentConversation.id);
+      if (updated && JSON.stringify(updated) !== JSON.stringify(currentConversation)) {
+        setCurrentConversation(updated);
+      }
+    }
+  }, [conversations]);
 
   const deleteConversation = useCallback((conversationId: string) => {
     setConversations(prev => prev.filter(conv => conv.id !== conversationId));

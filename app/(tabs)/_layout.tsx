@@ -3,7 +3,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
-import { HomeIcon, HistoryIcon, ResourcesIcon, ProfileIcon } from '../components/NavIcons';
+import { HomeIcon, HistoryIcon, ResourcesIcon, ProfileIcon } from '../../components/NavIcons';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 

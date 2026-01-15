@@ -209,7 +209,7 @@ export default function LoginScreen() {
 
         {/* Footer */}
         <View style={authStyles.footer}>
-          <Text style={authStyles.footerText}>Don't have an account?</Text>
+          <Text style={authStyles.footerText}>Don&apos;t have an account?</Text>
           <Link href="/(auth)/register" asChild>
             <TouchableOpacity>
               <Text style={authStyles.footerLink}>Sign Up</Text>

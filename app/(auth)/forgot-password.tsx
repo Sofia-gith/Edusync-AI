@@ -85,7 +85,7 @@ export default function ForgotPasswordScreen() {
                 { textAlign: 'center', marginBottom: 32 },
               ]}
             >
-              We've sent a password reset link to{'\n'}
+              We&apos;ve sent a password reset link to{'\n'}
               <Text style={{ fontWeight: '600', color: Colors.primary }}>
                 {email}
               </Text>
@@ -143,8 +143,8 @@ export default function ForgotPasswordScreen() {
         <View style={authStyles.form}>
           <Text style={authStyles.title}>Forgot Password?</Text>
           <Text style={authStyles.subtitle}>
-            Don't worry! Enter your email and we'll send you a link to reset
-            your password.
+            Don&apos;t worry! Enter your email and we&apos;ll send you a link to
+            reset your password.
           </Text>
 
           {/* Email Input */}

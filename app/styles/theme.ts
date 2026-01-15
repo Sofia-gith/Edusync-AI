@@ -1,40 +1,32 @@
 export const Colors = {
-  // Primary Colors
   primary: '#5DCED9',
-  primaryDark: '#4AB8C4',
-  primaryLight: '#F0F9FA',
-  
-  // Accent Colors
-  accent: '#FF9800',
-  accentLight: '#FFF4E6',
-  
-  // Neutral Colors
+  primaryDark: '#0E7490',
+  primaryLight: '#E0F7FA',
+
+  accent: '#F97316',
+  accentLight: '#FFEDD5',
+
   white: '#FFFFFF',
-  background: '#F5F5F5',
-  
-  // Text Colors
-  textPrimary: '#333333',
-  textSecondary: '#666666',
-  textTertiary: '#999999',
-  
-  // Border Colors
-  border: '#E0E0E0',
-  borderLight: '#F0F0F0',
-  
-  // Status Colors
-  success: '#4CAF50',
-  error: '#FF5252',
-  warning: '#FFC107',
-  info: '#2196F3',
-  infoLight: '#E3F2FD',
-  infoDark: '#1565C0',
-  
-  // Overlay
-  overlay: 'rgba(0, 0, 0, 0.5)',
-  
-  // Message Colors
-  userMessage: '#FF9800',
-  assistantMessage: '#F0F0F0',
+  background: '#F3F4F6',
+
+  textPrimary: '#111827',
+  textSecondary: '#4B5563',
+  textTertiary: '#9CA3AF',
+
+  border: '#E5E7EB',
+  borderLight: '#E5E7EB',
+
+  success: '#16A34A',
+  error: '#EF4444',
+  warning: '#F59E0B',
+  info: '#2563EB',
+  infoLight: '#DBEAFE',
+  infoDark: '#1D4ED8',
+
+  overlay: 'rgba(15, 23, 42, 0.4)',
+
+  userMessage: '#5DCED9',
+  assistantMessage: '#F9FAFB',
 } as const;
 
 export const Spacing = {

@@ -1,115 +1,121 @@
 // app/(tabs)/resources.tsx - REFATORADO COM 2 TABS
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { resourcesTabsStyles } from '../../../app/styles/resources-tabs.styles';
-import { Colors } from '../../../app/styles';
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Colors } from "../../../app/styles";
+import { resourcesTabsStyles } from "../../../app/styles/resources-tabs.styles";
 
 interface StudyMaterial {
   id: string;
   title: string;
   description: string;
-  type: 'article' | 'video' | 'pdf' | 'course';
+  type: "article" | "video" | "pdf" | "course";
   duration?: string;
   pages?: number;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Iniciante" | "Intermediário" | "Avançado";
 }
 
 export const StudyMaterialsTab: React.FC = () => {
   const [materials] = useState<StudyMaterial[]>([
     {
-      id: '1',
-      title: 'Gestão de Salas Multi-série',
-      description: 'Aprenda estratégias eficazes para organizar e gerenciar turmas com diferentes níveis de aprendizagem.',
-      type: 'article',
-      duration: '15 min',
-      difficulty: 'Beginner',
+      id: "1",
+      title: "Gestão de Salas Multi-série",
+      description:
+        "Aprenda estratégias eficazes para organizar e gerenciar turmas com diferentes níveis de aprendizagem.",
+      type: "article",
+      duration: "15 min",
+      difficulty: "Iniciante",
     },
     {
-      id: '2',
-      title: 'Diferenciação Pedagógica na Prática',
-      description: 'Técnicas comprovadas para adaptar conteúdos e atividades às necessidades individuais dos alunos.',
-      type: 'video',
-      duration: '25 min',
-      difficulty: 'Intermediate',
+      id: "2",
+      title: "Diferenciação Pedagógica na Prática",
+      description:
+        "Técnicas comprovadas para adaptar conteúdos e atividades às necessidades individuais dos alunos.",
+      type: "video",
+      duration: "25 min",
+      difficulty: "Intermediário",
     },
     {
-      id: '3',
-      title: 'Ensino com Recursos Limitados',
-      description: 'Guia completo sobre como criar materiais didáticos de qualidade usando recursos simples e acessíveis.',
-      type: 'pdf',
+      id: "3",
+      title: "Ensino com Recursos Limitados",
+      description:
+        "Guia completo sobre como criar materiais didáticos de qualidade usando recursos simples e acessíveis.",
+      type: "pdf",
       pages: 42,
-      difficulty: 'Beginner',
+      difficulty: "Iniciante",
     },
     {
-      id: '4',
-      title: 'Alfabetização em Contextos Rurais',
-      description: 'Metodologias específicas para alfabetização em escolas rurais, considerando a realidade local.',
-      type: 'course',
-      duration: '2h 30min',
-      difficulty: 'Advanced',
+      id: "4",
+      title: "Alfabetização em Contextos Rurais",
+      description:
+        "Metodologias específicas para alfabetização em escolas rurais, considerando a realidade local.",
+      type: "course",
+      duration: "2h 30min",
+      difficulty: "Avançado",
     },
     {
-      id: '5',
-      title: 'Gestão de Comportamento em Sala',
-      description: 'Estratégias positivas para lidar com desafios comportamentais e criar um ambiente de aprendizagem produtivo.',
-      type: 'video',
-      duration: '18 min',
-      difficulty: 'Intermediate',
+      id: "5",
+      title: "Gestão de Comportamento em Sala",
+      description:
+        "Estratégias positivas para lidar com desafios comportamentais e criar um ambiente de aprendizagem produtivo.",
+      type: "video",
+      duration: "18 min",
+      difficulty: "Intermediário",
     },
     {
-      id: '6',
-      title: 'Avaliação Formativa Prática',
-      description: 'Como avaliar o progresso dos alunos de forma contínua e usar os dados para melhorar o ensino.',
-      type: 'article',
-      duration: '12 min',
-      difficulty: 'Intermediate',
+      id: "6",
+      title: "Avaliação Formativa Prática",
+      description:
+        "Como avaliar o progresso dos alunos de forma contínua e usar os dados para melhorar o ensino.",
+      type: "article",
+      duration: "12 min",
+      difficulty: "Intermediário",
     },
   ]);
 
-  const getTypeIcon = (type: StudyMaterial['type']) => {
+  const getTypeIcon = (type: StudyMaterial["type"]) => {
     switch (type) {
-      case 'article':
-        return 'document-text';
-      case 'video':
-        return 'play-circle';
-      case 'pdf':
-        return 'document';
-      case 'course':
-        return 'school';
+      case "article":
+        return "document-text";
+      case "video":
+        return "play-circle";
+      case "pdf":
+        return "document";
+      case "course":
+        return "school";
       default:
-        return 'book';
+        return "book";
     }
   };
 
-  const getTypeColor = (type: StudyMaterial['type']) => {
+  const getTypeColor = (type: StudyMaterial["type"]) => {
     switch (type) {
-      case 'article':
-        return '#2196F3';
-      case 'video':
-        return '#FF5252';
-      case 'pdf':
-        return '#FF9800';
-      case 'course':
-        return '#4CAF50';
+      case "article":
+        return Colors.info;
+      case "video":
+        return Colors.error;
+      case "pdf":
+        return Colors.warning;
+      case "course":
+        return Colors.success;
       default:
         return Colors.primary;
     }
   };
 
-  const getDifficultyColor = (difficulty: StudyMaterial['difficulty']) => {
+  const getDifficultyColor = (difficulty: StudyMaterial["difficulty"]) => {
     switch (difficulty) {
-      case 'Beginner':
-        return '#4CAF50';
-      case 'Intermediate':
-        return '#FF9800';
-      case 'Advanced':
-        return '#FF5252';
+      case "Iniciante":
+        return Colors.success;
+      case "Intermediário":
+        return Colors.warning;
+      case "Avançado":
+        return Colors.error;
     }
   };
 
   const handleOpenMaterial = (materialId: string) => {
-    console.log('Opening material:', materialId);
+    console.log("Opening material:", materialId);
     // TODO: Implementar abertura do material
   };
 
@@ -137,7 +143,11 @@ export const StudyMaterialsTab: React.FC = () => {
             <View
               style={[
                 resourcesTabsStyles.studyMaterialBadge,
-                { backgroundColor: `${getDifficultyColor(material.difficulty)}20` },
+                {
+                  backgroundColor: `${getDifficultyColor(
+                    material.difficulty
+                  )}20`,
+                },
               ]}
             >
               <Text
@@ -164,12 +174,19 @@ export const StudyMaterialsTab: React.FC = () => {
                   color={getTypeColor(material.type)}
                 />
                 <Text style={resourcesTabsStyles.studyMaterialMetaText}>
-                  {material.type === 'pdf' ? 'PDF' : material.type.charAt(0).toUpperCase() + material.type.slice(1)}
+                  {material.type === "pdf"
+                    ? "PDF"
+                    : material.type.charAt(0).toUpperCase() +
+                      material.type.slice(1)}
                 </Text>
               </View>
 
               <View style={resourcesTabsStyles.studyMaterialMetaItem}>
-                <Ionicons name="time-outline" size={16} color={Colors.textTertiary} />
+                <Ionicons
+                  name="time-outline"
+                  size={16}
+                  color={Colors.textTertiary}
+                />
                 <Text style={resourcesTabsStyles.studyMaterialMetaText}>
                   {material.duration || `${material.pages} páginas`}
                 </Text>

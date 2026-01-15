@@ -101,9 +101,15 @@ export const ClassProfileTab: React.FC = () => {
         </Text>
         
         <View style={resourcesTabsStyles.profileCard}>
-          <Text style={{ fontSize: 14, color: Colors.textSecondary, textAlign: 'center' }}>
-            Clique em "Gerar Sugestões Personalizadas" para receber materiais
-            adaptados ao perfil da sua turma
+          <Text
+            style={{
+              fontSize: 14,
+              color: Colors.textSecondary,
+              textAlign: 'center',
+            }}
+          >
+            Clique em &quot;Gerar Sugestões Personalizadas&quot; para receber
+            materiais adaptados ao perfil da sua turma
           </Text>
         </View>
       </View>

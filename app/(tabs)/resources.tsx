@@ -15,11 +15,18 @@ export default function ResourcesScreen() {
   return (
     <SafeAreaView style={commonStyles.container}>
       <View style={commonStyles.header}>
-        <Text style={commonStyles.headerTitle}>Recursos</Text>
-        <TouchableOpacity style={resourcesStyles.syncButton}>
-          <Ionicons name="sync" size={16} color={Colors.white} />
-          <Text style={resourcesStyles.syncText}>Sincronizar</Text>
-        </TouchableOpacity>
+        <View style={commonStyles.headerLeft}>
+          <Text style={commonStyles.headerTitle}>Resources</Text>
+          <Text style={resourcesStyles.headerSubtitle}>
+            Your offline teaching support hub
+          </Text>
+        </View>
+        <View style={commonStyles.headerRight}>
+          <TouchableOpacity style={resourcesStyles.syncButton}>
+            <Ionicons name="sync" size={16} color={Colors.primary} />
+            <Text style={resourcesStyles.syncText}>Sync</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={resourcesTabsStyles.tabBar}>
@@ -36,7 +43,7 @@ export default function ResourcesScreen() {
               selectedTab === "profile" && resourcesTabsStyles.tabTextActive,
             ]}
           >
-            Perfil da Turma
+            Class Profile
           </Text>
         </TouchableOpacity>
 
@@ -53,9 +60,27 @@ export default function ResourcesScreen() {
               selectedTab === "study" && resourcesTabsStyles.tabTextActive,
             ]}
           >
-            Materiais
+            Materials
           </Text>
         </TouchableOpacity>
+      </View>
+
+      <View style={resourcesStyles.infoBanner}>
+        <Ionicons
+          name="sparkles-outline"
+          size={20}
+          color={Colors.info}
+          style={resourcesStyles.infoBannerIcon}
+        />
+        <View style={resourcesStyles.infoBannerContent}>
+          <Text style={resourcesStyles.infoBannerTitle}>
+            Smart suggestions enabled
+          </Text>
+          <Text style={resourcesStyles.infoBannerText}>
+            The resources below are tailored to your class profile and work even
+            when you are offline.
+          </Text>
+        </View>
       </View>
 
       {selectedTab === "profile" && <ClassProfileTab />}

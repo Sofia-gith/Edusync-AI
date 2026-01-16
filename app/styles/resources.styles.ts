@@ -1,15 +1,25 @@
-import { StyleSheet } from 'react-native';
-import { Colors, Spacing, BorderRadius, FontSizes, FontWeights, Shadows } from './theme';
+import { StyleSheet } from "react-native";
+import {
+  BorderRadius,
+  Colors,
+  FontSizes,
+  FontWeights,
+  Shadows,
+  Spacing,
+} from "./theme";
 
 export const resourcesStyles = StyleSheet.create({
   syncButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.primary,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.white,
     paddingHorizontal: Spacing.md,
     paddingVertical: 6,
-    borderRadius: BorderRadius.xl,
+    borderRadius: BorderRadius.xxl,
     gap: Spacing.xs,
+    borderWidth: 1,
+    borderColor: Colors.borderLight,
+    ...Shadows.small,
   },
   syncIcon: {
     fontSize: FontSizes.base,
@@ -17,7 +27,12 @@ export const resourcesStyles = StyleSheet.create({
   syncText: {
     fontSize: FontSizes.base,
     fontWeight: FontWeights.semibold,
-    color: Colors.white,
+    color: Colors.primary,
+  },
+
+  headerSubtitle: {
+    fontSize: FontSizes.sm,
+    color: Colors.textSecondary,
   },
 
   // Category Filter
@@ -32,8 +47,8 @@ export const resourcesStyles = StyleSheet.create({
     gap: Spacing.sm,
   },
   categoryButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.sm,
     borderRadius: BorderRadius.xxl,
@@ -57,7 +72,7 @@ export const resourcesStyles = StyleSheet.create({
 
   // Resource Card
   resourceCard: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: Colors.white,
     borderRadius: BorderRadius.lg,
     padding: Spacing.lg,
@@ -69,8 +84,8 @@ export const resourcesStyles = StyleSheet.create({
     height: 48,
     borderRadius: BorderRadius.xxl,
     backgroundColor: Colors.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: Spacing.md,
   },
   resourceIconText: {
@@ -92,9 +107,9 @@ export const resourcesStyles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   resourceFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   categoryTag: {
     backgroundColor: Colors.borderLight,
@@ -116,7 +131,7 @@ export const resourcesStyles = StyleSheet.create({
 
   // Info Banner
   infoBanner: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: Colors.infoLight,
     borderRadius: BorderRadius.lg,
     padding: Spacing.lg,

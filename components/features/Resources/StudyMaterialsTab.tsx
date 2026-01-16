@@ -12,64 +12,64 @@ interface StudyMaterial {
   type: "article" | "video" | "pdf" | "course";
   duration?: string;
   pages?: number;
-  difficulty: "Iniciante" | "Intermediário" | "Avançado";
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
 }
 
 export const StudyMaterialsTab: React.FC = () => {
   const [materials] = useState<StudyMaterial[]>([
     {
       id: "1",
-      title: "Gestão de Salas Multi-série",
+      title: "Managing multi-grade classrooms",
       description:
-        "Aprenda estratégias eficazes para organizar e gerenciar turmas com diferentes níveis de aprendizagem.",
+        "Learn practical strategies to organize and manage classes with students at very different learning levels.",
       type: "article",
       duration: "15 min",
-      difficulty: "Iniciante",
+      difficulty: "Beginner",
     },
     {
       id: "2",
-      title: "Diferenciação Pedagógica na Prática",
+      title: "Differentiated instruction in practice",
       description:
-        "Técnicas comprovadas para adaptar conteúdos e atividades às necessidades individuais dos alunos.",
+        "Concrete techniques to adapt content and activities to the individual needs of each student.",
       type: "video",
       duration: "25 min",
-      difficulty: "Intermediário",
+      difficulty: "Intermediate",
     },
     {
       id: "3",
-      title: "Ensino com Recursos Limitados",
+      title: "Teaching with limited resources",
       description:
-        "Guia completo sobre como criar materiais didáticos de qualidade usando recursos simples e acessíveis.",
+        "Step-by-step guide to create effective learning materials using simple, low-cost resources.",
       type: "pdf",
       pages: 42,
-      difficulty: "Iniciante",
+      difficulty: "Beginner",
     },
     {
       id: "4",
-      title: "Alfabetização em Contextos Rurais",
+      title: "Literacy in rural contexts",
       description:
-        "Metodologias específicas para alfabetização em escolas rurais, considerando a realidade local.",
+        "Methodologies designed for literacy in rural schools, adapted to local realities and constraints.",
       type: "course",
       duration: "2h 30min",
-      difficulty: "Avançado",
+      difficulty: "Advanced",
     },
     {
       id: "5",
-      title: "Gestão de Comportamento em Sala",
+      title: "Positive behavior management",
       description:
-        "Estratégias positivas para lidar com desafios comportamentais e criar um ambiente de aprendizagem produtivo.",
+        "Positive strategies to respond to challenging behavior and build a safe, productive classroom climate.",
       type: "video",
       duration: "18 min",
-      difficulty: "Intermediário",
+      difficulty: "Intermediate",
     },
     {
       id: "6",
-      title: "Avaliação Formativa Prática",
+      title: "Practical formative assessment",
       description:
-        "Como avaliar o progresso dos alunos de forma contínua e usar os dados para melhorar o ensino.",
+        "How to monitor student progress continuously and use the data to adjust your teaching in real time.",
       type: "article",
       duration: "12 min",
-      difficulty: "Intermediário",
+      difficulty: "Intermediate",
     },
   ]);
 
@@ -105,11 +105,11 @@ export const StudyMaterialsTab: React.FC = () => {
 
   const getDifficultyColor = (difficulty: StudyMaterial["difficulty"]) => {
     switch (difficulty) {
-      case "Iniciante":
+      case "Beginner":
         return Colors.success;
-      case "Intermediário":
+      case "Intermediate":
         return Colors.warning;
-      case "Avançado":
+      case "Advanced":
         return Colors.error;
     }
   };
@@ -122,7 +122,7 @@ export const StudyMaterialsTab: React.FC = () => {
   return (
     <ScrollView style={resourcesTabsStyles.classProfileContainer}>
       <Text style={resourcesTabsStyles.materialsHeader}>
-        Materiais para Revisão do Professor
+        Teacher study materials
       </Text>
       <Text
         style={{
@@ -131,7 +131,7 @@ export const StudyMaterialsTab: React.FC = () => {
           marginBottom: 16,
         }}
       >
-        Aprimore suas habilidades com conteúdos selecionados para educadores
+        Deepen your practice with curated content designed for educators.
       </Text>
 
       {materials.map((material) => (
@@ -188,7 +188,8 @@ export const StudyMaterialsTab: React.FC = () => {
                   color={Colors.textTertiary}
                 />
                 <Text style={resourcesTabsStyles.studyMaterialMetaText}>
-                  {material.duration || `${material.pages} páginas`}
+                  {material.duration ||
+                    `${material.pages} pages`}
                 </Text>
               </View>
             </View>
@@ -199,7 +200,7 @@ export const StudyMaterialsTab: React.FC = () => {
             >
               <Ionicons name="arrow-forward" size={16} color={Colors.primary} />
               <Text style={resourcesTabsStyles.studyMaterialButtonText}>
-                Acessar
+                Open
               </Text>
             </TouchableOpacity>
           </View>

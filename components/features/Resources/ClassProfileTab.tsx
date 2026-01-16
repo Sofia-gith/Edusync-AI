@@ -6,15 +6,15 @@ import { Colors } from '../../../app/styles';
 
 export const ClassProfileTab: React.FC = () => {
   const [description, setDescription] = useState(
-    'Turma multi-série com 28 alunos do 4º, 5º e 6º ano. Principais desafios: atenção dispersa durante atividades longas, níveis de leitura muito variados entre os alunos. Pontos fortes: os alunos são colaborativos e têm muita curiosidade natural. Temos 2 alunos com dificuldade de aprendizagem que precisam de atenção extra. Recursos limitados - poucos livros e materiais didáticos.'
+    'Multi-grade class with 28 students in 4th, 5th, and 6th grade. Main challenges: limited attention span during long activities, very different reading levels, and a few students who need extra support. Strengths: highly collaborative group and strong natural curiosity. Limited resources: few books and printed materials available.'
   );
 
   const quickTags = [
-    { icon: 'people', label: 'Turma multi-série' },
-    { icon: 'book', label: 'Poucos recursos' },
-    { icon: 'star', label: 'Alunos agitados' },
-    { icon: 'school', label: 'Níveis variados' },
-    { icon: 'location', label: 'Zona rural' },
+    { icon: 'people', label: 'Multi-grade classroom' },
+    { icon: 'book', label: 'Limited resources' },
+    { icon: 'star', label: 'Highly active students' },
+    { icon: 'school', label: 'Mixed learning levels' },
+    { icon: 'location', label: 'Rural context' },
   ];
 
   const handleGenerateSuggestions = () => {
@@ -32,10 +32,10 @@ export const ClassProfileTab: React.FC = () => {
           </View>
           <View style={resourcesTabsStyles.profileTitle}>
             <Text style={resourcesTabsStyles.profileTitleText}>
-              Perfil da Sala
+              Classroom profile
             </Text>
             <Text style={resourcesTabsStyles.profileSubtitle}>
-              Descreva sua turma e receba sugestões
+              Describe your class to receive tailored suggestions
             </Text>
           </View>
         </View>
@@ -43,7 +43,7 @@ export const ClassProfileTab: React.FC = () => {
         {/* Description Section */}
         <View style={resourcesTabsStyles.descriptionSection}>
           <Text style={resourcesTabsStyles.sectionLabel}>
-            Descreva sua turma
+            Describe your class
           </Text>
           <TextInput
             style={resourcesTabsStyles.descriptionText}
@@ -52,18 +52,18 @@ export const ClassProfileTab: React.FC = () => {
             multiline
             numberOfLines={6}
             textAlignVertical="top"
-            placeholder="Descreva os desafios, pontos fortes e necessidades da sua turma..."
+            placeholder="Describe key challenges, strengths, and specific needs of your class..."
             placeholderTextColor={Colors.textTertiary}
           />
           <Text style={resourcesTabsStyles.wordCount}>
-            {description.split(' ').length} palavras
+            {description.split(' ').length} words
           </Text>
         </View>
 
         {/* Quick Tags */}
         <View style={resourcesTabsStyles.quickTagsSection}>
           <Text style={resourcesTabsStyles.quickTagsLabel}>
-            Adicione rapidamente:
+            Quick add:
           </Text>
           <View style={resourcesTabsStyles.tagsContainer}>
             {quickTags.map((tag, index) => (
@@ -89,7 +89,7 @@ export const ClassProfileTab: React.FC = () => {
         >
           <Ionicons name="sparkles" size={20} color={Colors.white} />
           <Text style={resourcesTabsStyles.generateButtonText}>
-            Gerar Sugestões Personalizadas
+            Generate personalized suggestions
           </Text>
         </TouchableOpacity>
       </View>
@@ -97,7 +97,7 @@ export const ClassProfileTab: React.FC = () => {
       {/* Available Materials Section */}
       <View style={resourcesTabsStyles.materialsSection}>
         <Text style={resourcesTabsStyles.materialsHeader}>
-          Materiais Disponíveis
+          Available materials
         </Text>
         
         <View style={resourcesTabsStyles.profileCard}>
@@ -108,8 +108,8 @@ export const ClassProfileTab: React.FC = () => {
               textAlign: 'center',
             }}
           >
-            Clique em &quot;Gerar Sugestões Personalizadas&quot; para receber
-            materiais adaptados ao perfil da sua turma
+            Select &quot;Generate personalized suggestions&quot; to unlock
+            resources that match this classroom profile.
           </Text>
         </View>
       </View>

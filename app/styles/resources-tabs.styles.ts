@@ -5,20 +5,24 @@ export const resourcesTabsStyles = StyleSheet.create({
   // Tab Navigation
   tabBar: {
     flexDirection: 'row',
+    marginHorizontal: Spacing.lg,
+    marginTop: Spacing.md,
+    marginBottom: Spacing.sm,
     backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-    paddingHorizontal: Spacing.md,
+    padding: 4,
+    borderRadius: BorderRadius.xxl,
+    borderWidth: 1,
+    borderColor: Colors.borderLight,
+    ...Shadows.small,
   },
   tab: {
     flex: 1,
-    paddingVertical: Spacing.md,
+    paddingVertical: Spacing.sm,
     alignItems: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: 'transparent',
+    borderRadius: BorderRadius.xxl,
   },
   tabActive: {
-    borderBottomColor: Colors.primary,
+    backgroundColor: Colors.primary,
   },
   tabText: {
     fontSize: FontSizes.base,
@@ -26,8 +30,8 @@ export const resourcesTabsStyles = StyleSheet.create({
     color: Colors.textSecondary,
   },
   tabTextActive: {
-    color: Colors.primary,
-    fontWeight: FontWeights.bold,
+    color: Colors.white,
+    fontWeight: FontWeights.semibold,
   },
 
   // Class Profile Styles

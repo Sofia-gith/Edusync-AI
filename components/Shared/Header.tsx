@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Spacing, FontSizes, FontWeights } from '../../app/styles/theme';
+import { ConnectivityIndicator } from '@/components/Shared/ConnectivityIndicator';
+
 
 interface AppHeaderProps {
   userName?: string;
@@ -40,10 +42,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
       
       <View style={styles.headerRight}>
         {showOfflineStatus && (
-          <View style={styles.statusBadge}>
-            <View style={styles.offlineDot} />
-            <Text style={styles.badgeText}>Offline</Text>
-          </View>
+          <ConnectivityIndicator />
         )}
         
         {showSettings && (

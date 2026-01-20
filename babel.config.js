@@ -6,6 +6,7 @@ module.exports = function (api) {
     plugins: [
       [
         'module-resolver',
+        '@babel/plugin-proposal-decorators',
         {
           root: ['./'],
           alias: {

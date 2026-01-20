@@ -1,0 +1,218 @@
+# .gitattributes - Line Ending Configuration
+# https://git-scm.com/docs/gitattributes
+
+# Auto detect text files and normalize to LF on commit
+* text=auto eol=lf
+
+# ============================================================
+# Source Code
+# ============================================================
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# ============================================================
+# Config Files
+# ============================================================
+*.yml text eol=lf
+*.yaml text eol=lf
+*.xml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.properties text eol=lf
+.editorconfig text eol=lf
+.env* text eol=lf
+.nvmrc text eol=lf
+.node-version text eol=lf
+
+# ============================================================
+# React Native / Expo
+# ============================================================
+*.gradle text eol=lf
+*.kt text eol=lf
+*.kts text eol=lf
+*.java text eol=lf
+*.m text eol=lf
+*.mm text eol=lf
+*.h text eol=lf
+*.swift text eol=lf
+*.podspec text eol=lf
+Podfile text eol=lf
+Podfile.lock text eol=lf
+Gemfile text eol=lf
+Gemfile.lock text eol=lf
+app.json text eol=lf
+app.config.js text eol=lf
+metro.config.js text eol=lf
+babel.config.js text eol=lf
+tsconfig.json text eol=lf
+
+# ============================================================
+# Documentation
+# ============================================================
+*.md text eol=lf
+*.txt text eol=lf
+*.adoc text eol=lf
+*.tex text eol=lf
+*.mustache text eol=lf
+AUTHORS text eol=lf
+CHANGELOG text eol=lf
+CHANGES text eol=lf
+CONTRIBUTING text eol=lf
+COPYING text eol=lf
+COPYRIGHT text eol=lf
+*COPYRIGHT* text eol=lf
+INSTALL text eol=lf
+LICENSE text eol=lf
+NEWS text eol=lf
+README text eol=lf
+*README* text eol=lf
+TODO text eol=lf
+
+# ============================================================
+# Web Assets
+# ============================================================
+*.css text eol=lf
+*.scss text eol=lf
+*.sass text eol=lf
+*.less text eol=lf
+*.styl text eol=lf
+*.html text eol=lf
+*.htm text eol=lf
+*.svg text eol=lf
+
+# ============================================================
+# Scripts (Unix-style - LF)
+# ============================================================
+
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+*.fish text eol=lf
+
+# ============================================================
+# Scripts (Windows-style - CRLF)
+# ============================================================
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# ============================================================
+# Docker
+# ============================================================
+Dockerfile text eol=lf
+*.dockerignore text eol=lf
+docker-compose*.yml text eol=lf
+
+# ============================================================
+# Git
+# ============================================================
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitkeep text eol=lf
+.gitmodules text eol=lf
+
+# ============================================================
+# Binary Files (no text conversion)
+# ============================================================
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.bmp binary
+*.tiff binary
+*.tif binary
+*.svg binary
+*.eps binary
+*.ai binary
+*.psd binary
+
+# Fonts
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+
+# Audio/Video
+*.mp3 binary
+*.mp4 binary
+*.wav binary
+*.avi binary
+*.mov binary
+*.mkv binary
+*.webm binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.7z binary
+*.rar binary
+
+# Documents
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+
+# Compiled/Build artifacts
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.class binary
+*.jar binary
+*.war binary
+*.ear binary
+*.apk binary
+*.ipa binary
+*.app binary
+
+# Databases
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+
+# Other binary formats
+*.dat binary
+*.bin binary
+*.keystore binary
+*.jks binary
+*.p12 binary
+*.der binary
+*.cer binary
+*.crt binary
+*.pem binary
+
+# ============================================================
+# Special Handling
+# ============================================================
+
+# Package lock files (should preserve exact format)
+package-lock.json text eol=lf -diff
+yarn.lock text eol=lf -diff
+pnpm-lock.yaml text eol=lf -diff
+
+# Linguist overrides (for GitHub language stats)
+*.gradle linguist-language=Gradle
+*.kt linguist-language=Kotlin
+*.m linguist-language=Objective-C
+*.swift linguist-language=Swift
+
+# Diff settings
+*.lock -diff
+*.min.js -diff
+*.bundle.js -diff

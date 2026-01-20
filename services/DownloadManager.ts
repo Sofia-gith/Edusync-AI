@@ -2,6 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import connectivityService from "./ConnectivityService";
 import storageQuotaManager from "./StorageQuotaManager";
+import database from '../database';
+import Embedding from '../database/models/Embedding';
 
 export interface DownloadProgress {
   currentBatch: number;
@@ -260,8 +262,38 @@ class DownloadManager implements IDownloadManager, IDownloadEventEmitter {
         break;
       }
 
-      // Aqui seria o ponto de persistir embeddings em DB local (WatermelonDB/SQLite)
-      // Como ainda não há DB, seguimos apenas contabilizando.
+      // ✅ PERSISTIR EMBEDDINGS NO BANCO DE DADOS
+      try {
+        await database.write(async () => {
+          const embeddingsCollection = database.get<Embedding>('embeddings');
+          
+          const newRecords = batchData.map((emb: any) =>
+            embeddingsCollection.prepareCreate((record) => {
+              record.vector = JSON.stringify(emb.vector);
+              record.content = emb.content || '';
+              record.source = emb.source || '';
+              record.chapter = emb.chapter || '';
+              record.page = emb.page || 0;
+              
+              // Tratamento correto de metadata opcional
+              if (emb.metadata) {
+                record.metadata = JSON.stringify(emb.metadata);
+              }
+            })
+          );
+          
+          await database.batch(...newRecords);
+        });
+        
+        console.log(`✅ Batch ${currentBatch} persisted: ${batchData.length} embeddings`);
+      } catch (dbError) {
+        console.error(`❌ Database error on batch ${currentBatch}:`, dbError);
+        this.emit("download_event", {
+          type: "error",
+          error: `Database error: ${dbError}`,
+        });
+      }
+
       const batchDurationSec = (Date.now() - batchStart) / 1000;
       const bytesDownloaded = batchData.length * approxBytesPerEmbedding;
       const speedKBps = bytesDownloaded / 1024 / Math.max(1, batchDurationSec);
@@ -367,7 +399,7 @@ class DownloadManager implements IDownloadManager, IDownloadEventEmitter {
     const failed = tasks.filter((t) => t.status === "failed");
     const updated = tasks.map((t) =>
       t.status === "failed"
-        ? { ...t, status: "pending", retryCount: 0, error: undefined }
+        ? { ...t, status: "pending" as const, retryCount: 0, error: undefined }
         : t
     );
     await AsyncStorage.setItem(TASKS_KEY, JSON.stringify(updated));

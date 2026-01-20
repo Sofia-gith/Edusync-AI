@@ -1,3 +1,7 @@
+import { Q } from '@nozbe/watermelondb';
+import database from '../database';
+import Embedding from '../database/models/Embedding';
+
 type EmbeddingVector = number[];
 
 interface EmbeddingRecord {
@@ -25,7 +29,6 @@ interface LocalSearchResult {
 }
 
 class LocalVectorSearch {
-  private embeddings: EmbeddingRecord[] = [];
   private expectedDimensions = 384;
 
   validateDimensions(embedding: EmbeddingVector): boolean {
@@ -34,22 +37,72 @@ class LocalVectorSearch {
     );
   }
 
-  async preloadEmbeddings(records: EmbeddingRecord[]): Promise<void> {
-    this.embeddings = records.slice();
+  /**
+   * Carrega embeddings do banco de dados
+   */
+  private async loadEmbeddingsFromDB(
+    filter?: { source?: string; chapter?: string }
+  ): Promise<EmbeddingRecord[]> {
+    try {
+      const embeddingsCollection = database.get<Embedding>('embeddings');
+      
+      // Criar array de condições
+      const conditions: any[] = [];
+
+      // Aplicar filtros usando Q.where
+      if (filter?.source) {
+        conditions.push(Q.where('source', filter.source));
+      }
+      if (filter?.chapter) {
+        conditions.push(Q.where('chapter', filter.chapter));
+      }
+
+      // Executar query
+      const records = await embeddingsCollection
+        .query(...conditions)
+        .fetch();
+
+      return records.map((r) => ({
+        id: r.id,
+        vector: r.vectorArray,
+        content: r.content,
+        source: r.source,
+        chapter: r.chapter,
+        metadata: r.metadataObject,
+      }));
+    } catch (error) {
+      console.error('Error loading embeddings from DB:', error);
+      return [];
+    }
   }
 
   async getEmbeddingCount(): Promise<number> {
-    return this.embeddings.length;
+    try {
+      const embeddingsCollection = database.get<Embedding>('embeddings');
+      return await embeddingsCollection.query().fetchCount();
+    } catch (error) {
+      console.error('Error getting embedding count:', error);
+      return 0;
+    }
   }
 
   async search(
     queryEmbedding: EmbeddingVector,
-    options: SearchOptions = {},
+    options: SearchOptions = {}
   ): Promise<LocalSearchResult[]> {
     const topK = options.topK ?? 10;
     const minScore = options.minScore ?? 0;
-    const filtered = this.applyFilter(this.embeddings, options.filter);
-    const results = filtered
+
+    // Carrega embeddings do banco com filtros
+    const embeddings = await this.loadEmbeddingsFromDB(options.filter);
+
+    if (embeddings.length === 0) {
+      console.warn('⚠️  No embeddings found in database');
+      return [];
+    }
+
+    // Calcula similaridade
+    const results = embeddings
       .map((rec) => {
         const score = this.cosineSimilarity(queryEmbedding, rec.vector);
         return {
@@ -64,19 +117,8 @@ class LocalVectorSearch {
       .filter((r) => r.score >= minScore)
       .sort((a, b) => b.score - a.score)
       .slice(0, topK);
-    return results;
-  }
 
-  private applyFilter(
-    records: EmbeddingRecord[],
-    filter?: { source?: string; chapter?: string },
-  ) {
-    if (!filter) return records;
-    return records.filter((r) => {
-      if (filter.source && r.source !== filter.source) return false;
-      if (filter.chapter && r.chapter !== filter.chapter) return false;
-      return true;
-    });
+    return results;
   }
 
   private cosineSimilarity(a: EmbeddingVector, b: EmbeddingVector): number {

@@ -73,8 +73,9 @@ class ConnectivityService {
       type = "cellular";
     } else if (state.type === "none") {
       type = "none";
-    } else if (state.type === "unknown" && isConnected) {
-      // Fallback para emuladores ou redes não identificadas mas conectadas
+    } else if (isConnected) {
+      // Fallback para qualquer outro tipo conectado (ethernet, bluetooth, vpn, other)
+      // Emuladores frequentemente caem aqui
       type = "wifi";
     }
 

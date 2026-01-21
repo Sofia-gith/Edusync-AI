@@ -2,6 +2,10 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+  
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
@@ -12,7 +16,8 @@
       "@/styles/*": ["./styles/*"],
       "@/utils/*": ["./utils/*"],
       "@/constants/*": ["./constants/*"],
-      "@/assets/*": ["./assets/*"]
+      "@/assets/*": ["./assets/*"],
+      "@/database/*": ["./database/*"]
     }
   },
   "include": [
